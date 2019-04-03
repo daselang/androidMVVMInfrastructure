@@ -1,11 +1,10 @@
-package com.databos.demo.general.network
+package com.demo.mvvm.general.network
 
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.DeviceUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.demo.mvvm.others.ConstantsCollection
 import com.demo.mvvm.BuildConfig
-import com.demo.mvvm.general.network.CommonParamsInterceptor
 import com.demo.mvvm.others.SystemHelper
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import okhttp3.OkHttpClient

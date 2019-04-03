@@ -1,7 +1,7 @@
 package com.demo.mvvm.viewmodels
 
 import com.airbnb.mvrx.*
-import com.databos.demo.general.network.ApiManager
+import com.demo.mvvm.general.network.ApiManager
 import com.demo.mvvm.general.core.CoreViewModel
 import com.demo.mvvm.general.network.NetWorkRequestException
 import com.demo.mvvm.general.network.NetworkScheduler
