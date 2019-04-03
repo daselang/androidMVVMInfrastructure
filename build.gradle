@@ -1,0 +1,60 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlinVersion = '1.3.21'
+    ext.mvrxVersion = '0.7.2'
+    ext.supportLibVersion = '28.0.0'
+    ext.buildToolsVersion = '28.0.3'
+    ext.lifecycleVersion = '1.1.1'
+    ext.robolectricVersion = '3.8'
+    ext.epoxyVersion = '2.16.4'
+    ext.moshiVersion = '1.6.0'
+    ext.koinVersion = '0.9.3'
+    ext.retrofitVersion = '2.5.0'
+    ext.navVersion = '1.0.0-alpha09'
+    ext.roomVersion = "1.1.1"
+    ext.arouterRegisterVersion = '1.0.2'
+    ext.arouterApiVersion = '1.4.1'
+    ext.arouterCompilerVersion = '1.2.2'
+    ext.rxAndroidVersion = '2.1.0'
+    ext.rxJavaVersion = '2.2.4'
+    ext.rxlifecycleVersion = '2.2.2'
+    ext.autoDisposeVersion = '0.8.0'
+    ext.rxPermissionsVersion = '0.9.5'
+    ext.rxrelayVersion = '2.1.0'
+    ext.fastandrutilsVersion = '1.0.0'
+    ext.androidUtilCodeVersion = '1.22.10'
+    ext.okhttpProfilerVersion = '1.0.4'
+    ext.eventBusVersion = '3.1.1'
+    ext.tDialogVersion = '2.1.1'
+    ext.rxToolVersion = 'v2.2.8'
+    ext.qmuiVersion = '1.1.12'
+    ext.leakVersion = '1.6.3'
+    ext.fragmentationVersion = '1.3.6'
+    ext.eventBusActivityScopeVersion = '1.1.0'
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        classpath "com.alibaba:arouter-register:$arouterRegisterVersion"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,162 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.alibaba.arouter'
+
+android {
+    signingConfigs {
+    }
+    compileSdkVersion 28
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        applicationId "com.demo.mvvm"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    buildToolsVersion "$buildToolsVersion"
+    buildTypes {
+        release {
+            // 混淆
+            minifyEnabled false
+            // Zip align优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+//            shrinkResources true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // java jdk kotlin version
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+            , "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+            , "org.koin:koin-android-architecture:$koinVersion")
+
+    // support and compatible,lifecycle version
+    implementation("com.android.support:appcompat-v7:$supportLibVersion"
+            , "com.android.support:recyclerview-v7:$supportLibVersion"
+            , "android.arch.lifecycle:extensions:$lifecycleVersion"
+            , "com.android.support.constraint:constraint-layout:1.1.3")
+
+    // Airbnb company mvRx ,epoxy libs
+    implementation "com.airbnb.android:mvrx:$mvrxVersion"
+    implementation("com.airbnb.android:epoxy:$epoxyVersion", { exclude group: 'com.android.support' })
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+
+    // rxjava rxandroid
+    implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+            , "io.reactivex.rxjava2:rxjava:$rxJavaVersion")
+
+    // retrofit okhttp3 with network,adapter for rxjava
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion"
+            , "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+            , "com.squareup.okhttp3:logging-interceptor:3.9.0"
+            , "com.squareup.retrofit2:converter-gson:2.3.0")
+
+    // navigator components
+    implementation("android.arch.navigation:navigation-fragment-ktx:$navVersion"
+            , "android.arch.navigation:navigation-ui-ktx:$navVersion")
+
+    // ORM
+    implementation("android.arch.persistence.room:runtime:$roomVersion"
+            , "android.arch.persistence.room:rxjava2:$roomVersion")
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // 生命周期相关 lifecyble adapter to rxjava  https://github.com/trello/RxLifecycle
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycleVersion"
+    implementation("com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycleVersion"
+            , "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:$rxlifecycleVersion"
+            , "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rxlifecycleVersion"
+    )
+
+    // Uber company rxJava memory auto release libs
+    implementation("com.uber.autodispose:autodispose-android:$autoDisposeVersion",
+            "com.uber.autodispose:autodispose-android-archcomponents:$autoDisposeVersion",
+            "com.uber.autodispose:autodispose-kotlin:$autoDisposeVersion",
+            "com.uber.autodispose:autodispose-android-kotlin:$autoDisposeVersion",
+            "com.uber.autodispose:autodispose-android-archcomponents-kotlin:$autoDisposeVersion")
+
+    // 权限申请
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissionsVersion"
+
+    // alibaba ARouter
+    implementation("com.alibaba:arouter-api:$arouterApiVersion", { exclude group: "com.android.support" })
+
+    implementation "org.greenrobot:eventbus:$eventBusVersion"
+
+    //android快速开发的工具类 androidUtilCode
+    //https://blankj.com/2016/07/31/android-utils-code/
+    //https://github.com/Blankj/AndroidUtilCode
+//    implementation "cn.hotapk:fastandrutils:$fastandrutilsVersion"
+    implementation "com.blankj:utilcode:$androidUtilCodeVersion"
+
+    //拦截器 需要在 android studio 插件中心下载 okhttpprofiler 插件监听 okhttp3的请求，可生成 entity对象
+    implementation "com.itkacher.okhttpprofiler:okhttpprofiler:$okhttpProfilerVersion"
+
+    //弹窗组件 https://github.com/Timmy-zzh/TDialog
+    implementation "com.timmy.tdialog:tdialog:$tDialogVersion"
+
+    //RxTool UI 组件及库
+    //基础工具库,
+    //UI库
+    // 相机库
+    //功能库（Zxing扫描与生成二维码条形码 支付宝 微信）
+    //ArcGis For Android工具库（API：100.1以上版本）
+    implementation("com.github.vondear.RxTool:RxKit:$rxToolVersion", "com.github.vondear.RxTool:RxUI:$rxToolVersion",
+            "com.github.vondear.RxTool:RxCamera:$rxToolVersion", "com.github.vondear.RxTool:RxFeature:$rxToolVersion",
+            "com.github.vondear.RxTool:RxArcGisKit:$rxToolVersion")
+
+    // 腾讯 UI组件，集合控件，手势操作等
+    implementation(
+            "com.qmuiteam:qmui:$qmuiVersion"
+//            "com.qmuiteam:arch:0.3.0",
+//            "com.qmuiteam:qmuilint:1.0.1"
+    )
+    //内存泄露检测
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakVersion"
+    // Optional, if you use support library fragments:
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakVersion"
+
+
+    implementation(
+//            "me.yokeyword:fragmentation:$fragmentationVersion",
+            "me.yokeyword:fragmentation-core:$fragmentationVersion",
+            "me.yokeyword:fragmentation-swipeback:$fragmentationVersion",
+            "me.yokeyword:eventbus-activity-scope:$eventBusActivityScopeVersion"
+    )
+
+    implementation "com.android.support.test.espresso:espresso-idling-resource:3.0.2"
+    debugImplementation "com.amitshekhar.android:debug-db:1.0.4"
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test:runner:1.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.1"
+    kapt "com.alibaba:arouter-compiler:$arouterCompilerVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">MvRxLearn</string>
+    <string name="fragment_account_login_title">账套登录</string>
+    <string name="fragment_account_list_title">账套列表</string>
+</resources>
